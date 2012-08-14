@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:nao="http://nao.anofm.org/jsf/composite/util">
+
+	<div id="headerwrap">
+		<div id="header">
+			
+			<div class="logo1">
+				<h:graphicImage library="images" name="logo_64.png" alt="Logo 1" />
+			</div>
+			<div class="title">
+				<h1>#{msgs['common.title']}</h1>
+			</div>
+
+		</div>
+
+		<div id="short_menu">
+			<p class="pHeader1">
+				<h:form rendered="#{not empty request.remoteUser}">
+					<h:outputFormat value="#{msgs['common.login']}">
+						<f:param value=" #{request.remoteUser}"/>
+					</h:outputFormat>
+
+					<h:commandLink actionListener="#{session.invalidate()}" 
+						action="/index.xhtml?faces-redirect=true" 
+						value="Logout" >
+					</h:commandLink>
+				</h:form>
+			</p>
+		</div>
+
+		<div id="header_line"></div>
+
+	</div>
+
+</ui:composition>

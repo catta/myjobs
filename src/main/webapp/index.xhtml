@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	template="/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<h:outputLabel value="Name:" for="nameInput" />
+			<h:inputText id="nameInput" value="#{richBean.name}">
+				<a4j:ajax event="keyup" render="output" />
+			</h:inputText>
+			<h:panelGroup id="output">
+				<h:outputText value="Hello #{richBean.name}!"
+					rendered="#{not empty richBean.name}" />
+			</h:panelGroup>
+		<br/>
+			<h:outputLink value="sec/secured.jsf">secured</h:outputLink>
+		<br/>
+		Current user: #{request.remoteUser}
+
+		</h:form>
+	</ui:define>
+</ui:composition>

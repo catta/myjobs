@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet  id="jobs-1" author="catalin.croitoru" >
+        <createTable tableName="JOB" schemaName="JOBS">
+            <column name="ID" type="INT" autoIncrement="true" remarks="PK JOB">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_JOB"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    	<createTable tableName="USERS" schemaName="JOBS">
+    		<column name="ID" type="INT" autoIncrement="true" remarks="PK USERS">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USERS"/>
+    		</column>
+    		<column name="NAME" type="VARCHAR(255)" remarks="name surename">
+    			<constraints nullable="false" />
+    		</column>
+    		<column name="USERNAME" type="VARCHAR(255)" remarks="login username">
+    			<constraints nullable="false" unique="true" uniqueConstraintName="UNQ_USERS_USERNAME"/>
+    		</column>
+    		<column name="PASSWORD" type="VARCHAR(50)" remarks="user password">
+    			<constraints nullable="false"/>
+    		</column>
+    	</createTable>
+    	<createTable tableName="USER_ROLES" schemaName="JOBS">
+    		<column name="ROLE" type="VARCHAR(50)" remarks="role name">
+    			<constraints nullable="false"/>
+    		</column>
+    		<column name="FK_USER" type="INT" remarks="FK TO USERS.ID">
+    		</column>
+    	</createTable>
+    	<addForeignKeyConstraint constraintName="FK_USER_ROLES_TO_USERS" 
+    		referencedTableName="USERS"  referencedColumnNames="ID"
+    		baseColumnNames="FK_USER" baseTableName="USER_ROLES" 
+    		baseTableSchemaName="JOBS" referencedTableSchemaName="JOBS"/>
+    	<insert tableName="USERS" schemaName="JOBS">
+    		<column name="NAME" value="Catalin Croitoru"/>
+    		<column name="USERNAME" value="catalin"/>
+    		<column name="PASSWORD" value="catalin"/>
+    	</insert>
+		<insert tableName="USER_ROLES" schemaName="JOBS">
+			<column name="ROLE" value="ADMIN"/>
+			<column name="FK_USER" valueNumeric="1"/>
+		</insert>
+    </changeSet>
+</databaseChangeLog>
