@@ -12,15 +12,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.jobs.AbstractPUTest;
 import org.jobs.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+// @LocalClient
 public class JobsSessionTest
+extends AbstractPUTest
 {
 
 	private static final Logger	LOG	= LoggerFactory.getLogger( JobsSessionTest.class );
@@ -34,21 +36,13 @@ public class JobsSessionTest
 	@EJB
 	Caller						caller;
 
-	private DerbyTest			derbyTest;
-
 	@BeforeSuite
 	public void setup() throws Exception
 	{
 
-		derbyTest = new DerbyTest();
+		// super.setupBase();
 
-		derbyTest.setup();
-
-		derbyTest.mytest();
-
-		LOG.info( "############### DERBY DB STARTED ##################" );
-		LOG.info( "############### DERBY DB STARTED ##################" );
-		LOG.info( "############### DERBY DB STARTED ##################" );
+		LOG.info( "setup test" );
 
 		final Properties p = new Properties();
 		p.put( DerbyTest.DB_NAME, "new://Resource?type=DataSource" );
@@ -64,12 +58,6 @@ public class JobsSessionTest
 
 		LOG.info( "=========== STARTED ===========" );
 
-	}
-
-	@AfterSuite
-	public void teardown() throws Exception
-	{
-		derbyTest.teardown();
 	}
 
 	@Test
