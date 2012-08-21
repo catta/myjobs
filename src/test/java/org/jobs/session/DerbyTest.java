@@ -28,7 +28,7 @@ public class DerbyTest
 	public static String	DRIVER			= "org.apache.derby.jdbc.EmbeddedDriver";
 
 	// the database name
-	public static String	DB_NAME			= "jobsDbTest";
+	public static String	DB_NAME			= "JOBS";
 
 	// define the Derby connection URL to use
 	public static String	CONNECTION_URL	= "jdbc:derby:memory:" + DB_NAME + ";create=true";
