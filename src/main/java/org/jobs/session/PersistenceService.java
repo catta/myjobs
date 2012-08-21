@@ -47,4 +47,10 @@ public class PersistenceService
 
 		return result;
 	}
+
+	public int sum( int i, int j )
+	{
+		LOG.info( "sum {} + {}", i, j );
+		return i + j;
+	}
 }
