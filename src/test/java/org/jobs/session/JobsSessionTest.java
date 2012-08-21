@@ -2,7 +2,6 @@
 package org.jobs.session;
 
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.Callable;
 
 import javax.ejb.EJB;
@@ -43,12 +42,6 @@ extends AbstractPUTest
 		// super.setupBase();
 
 		LOG.info( "setup test" );
-
-		final Properties p = new Properties();
-		p.put( DerbyTest.DB_NAME, "new://Resource?type=DataSource" );
-		p.put( DerbyTest.DB_NAME + ".JdbcDriver", DerbyTest.DRIVER );
-		p.put( DerbyTest.DB_NAME + ".JdbcUrl", DerbyTest.CONNECTION_URL );
-		p.put( "jobs.hibernate.dialect", DerbyTest.DIALECT );
 
 		EJBContainer container = EJBContainer.createEJBContainer( p );
 

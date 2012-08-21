@@ -1,6 +1,8 @@
 
 package org.jobs;
 
+import java.util.Properties;
+
 import org.jobs.session.DerbyTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,8 @@ public abstract class AbstractPUTest
 
 	private DerbyTest			derbyTest;
 
+	protected Properties		p;
+
 	@BeforeSuite
 	public void setupBase() throws Exception
 	{
@@ -34,6 +38,12 @@ public abstract class AbstractPUTest
 		LOG.info( "############### DERBY DB STARTED ##################" );
 		LOG.info( "############### DERBY DB STARTED ##################" );
 		LOG.info( "############### DERBY DB STARTED ##################" );
+
+		p = new Properties();
+		p.put( DerbyTest.DB_NAME, "new://Resource?type=DataSource" );
+		p.put( DerbyTest.DB_NAME + ".JdbcDriver", DerbyTest.DRIVER );
+		p.put( DerbyTest.DB_NAME + ".JdbcUrl", DerbyTest.CONNECTION_URL );
+		p.put( "jobs.hibernate.dialect", DerbyTest.DIALECT );
 
 	}
 
