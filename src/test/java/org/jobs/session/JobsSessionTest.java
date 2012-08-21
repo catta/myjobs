@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import javax.ejb.EJB;
-import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.openejb.api.LocalClient;
 import org.jobs.AbstractPUTest;
 import org.jobs.entity.User;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-// @LocalClient
+@LocalClient
 public class JobsSessionTest
 extends AbstractPUTest
 {
@@ -43,9 +44,14 @@ extends AbstractPUTest
 
 		LOG.info( "setup test" );
 
-		EJBContainer container = EJBContainer.createEJBContainer( p );
+		// EJBContainer container = EJBContainer.createEJBContainer( p );
+		// final Context ctx = container.getContext();
 
-		final Context ctx = container.getContext();
+		// final Properties p = new Properties();
+		// p.put( Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.core.LocalInitialContextFactory" );
+
+		final Context ctx = new InitialContext( p );
+		// final Context ctx = new InitialContext();
 
 		ctx.bind( "inject", this );
 
