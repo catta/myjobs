@@ -9,7 +9,7 @@
 
 	<ui:define name="title">Secured content</ui:define>
 
-	<ui:define name="body">
+	<ui:define name="content">
 		Secured content
 		<br/>
 		Current user: #{request.remoteUser}
@@ -19,6 +19,8 @@
 				action="/index.xhtml?faces-redirect=true" 
 				value="Logout" >
 			</h:commandLink>
+			<br/>
+			<h:commandLink value="Users" action="/admin/users.xhtml?faces-redirect=true" />
 		</h:form>
 	</ui:define>
 </ui:composition>
