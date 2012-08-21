@@ -50,7 +50,7 @@ extends AbstractPUTest
 		// final Properties p = new Properties();
 		// p.put( Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.core.LocalInitialContextFactory" );
 
-		final Context ctx = new InitialContext( p );
+		final Context ctx = new InitialContext();
 		// final Context ctx = new InitialContext();
 
 		ctx.bind( "inject", this );

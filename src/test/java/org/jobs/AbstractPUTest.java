@@ -51,7 +51,7 @@ public abstract class AbstractPUTest
 		p.put( "openejb.validation.output.level", "verbose" );
 
 		// p.put( Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.core.LocalInitialContextFactory" );
-		p.put( Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.client.LocalInitialContextFactory" );
+		// p.put( Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.client.LocalInitialContextFactory" );
 
 		p.put( DerbyTest.DB_NAME, "new://Resource?type=DataSource" );
 		p.put( DerbyTest.DB_NAME + ".JdbcDriver", DerbyTest.DRIVER );
