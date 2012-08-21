@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import javax.ejb.EJB;
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,7 +16,7 @@ import org.jobs.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @LocalClient
@@ -36,31 +35,16 @@ extends AbstractPUTest
 	@EJB
 	Caller						caller;
 
-	@BeforeSuite
-	public void setup() throws Exception
+	@BeforeClass
+	public void setupClass() throws Exception
 	{
 
-		// super.setupBase();
-
-		LOG.info( "setup test" );
-
-		// EJBContainer container = EJBContainer.createEJBContainer( p );
-		// final Context ctx = container.getContext();
-
-		// final Properties p = new Properties();
-		// p.put( Context.INITIAL_CONTEXT_FACTORY, "org.apache.openejb.core.LocalInitialContextFactory" );
-
-		final Context ctx = new InitialContext();
-		// final Context ctx = new InitialContext();
-
-		ctx.bind( "inject", this );
-
-		LOG.info( "=========== STARTED ===========" );
-
+		LOG.info( "bind test {}", JobsSessionTest.class );
+		new InitialContext().bind( "inject", this );
 	}
 
 	@Test
-	public void sum() throws Exception
+	public void sum1() throws Exception
 	{
 		final int sum = service.sum( 2, 5 );
 
@@ -91,7 +75,28 @@ extends AbstractPUTest
 			LOG.info( "rand " + rand );
 		}
 
-		LOG.info( "===============================================" );
+		LOG.info( "=============================================== 1" );
 
 	}
+
+	@Test
+	public void sum2() throws Exception
+	{
+
+		final List<User> listUsers = caller.call( new Callable<List<User>>()
+		{
+
+			@Override
+			public List<User> call() throws Exception
+			{
+				return service.getList( User.class );
+			}
+		} );
+
+		LOG.info( "list users {}", listUsers.size() );
+
+		LOG.info( "=============================================== 2" );
+
+	}
+
 }
