@@ -1,0 +1,14 @@
+
+package org.jobs.entity;
+
+public enum JobState
+{
+
+	NEW,
+	APPLIED,
+	REFUSED,
+	ACCEPTED_TO_INTERVIEW,
+	SCHEDULED_INTERVIEW,
+	INTERVIEWED,
+	ACCEPTED_TO_JOB
+}
