@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.jobs.entity.User;
-import org.jobs.session.PersistenceService;
+import org.jobs.session.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ implements Serializable
 	private static final Logger	LOG					= LoggerFactory.getLogger( UsersBean.class );
 
 	@EJB
-	private PersistenceService	service;
+	private StorageService	service;
 
 	private List<User>			listUsers;
 

@@ -16,6 +16,7 @@ import org.jobs.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -28,14 +29,26 @@ public class JobsSessionTest
 	private EntityManager		entityManager;
 
 	@EJB
-	private PersistenceService	service;
+	private StorageService		service;
 
 	@EJB
 	Caller						caller;
 
+	private DerbyTest			derbyTest;
+
 	@BeforeSuite
 	public void setup() throws Exception
 	{
+
+		derbyTest = new DerbyTest();
+
+		derbyTest.setup();
+
+		derbyTest.mytest();
+
+		LOG.info( "############### DERBY DB STARTED ##################" );
+		LOG.info( "############### DERBY DB STARTED ##################" );
+		LOG.info( "############### DERBY DB STARTED ##################" );
 
 		final Properties p = new Properties();
 		p.put( DerbyTest.DB_NAME, "new://Resource?type=DataSource" );
@@ -50,10 +63,13 @@ public class JobsSessionTest
 		ctx.bind( "inject", this );
 
 		LOG.info( "=========== STARTED ===========" );
-		// Object ejb = ctx.lookup( "java:global/jobs/PersistenceService" );
 
-		// service = (PersistenceService) ejb;
+	}
 
+	@AfterSuite
+	public void teardown() throws Exception
+	{
+		derbyTest.teardown();
 	}
 
 	@Test
@@ -80,7 +96,7 @@ public class JobsSessionTest
 		LOG.info( "executing NATIVE QUERY" );
 
 		final Query nativeQuery = entityManager.createNativeQuery( "select user0_.id as id1_, user0_.name as name1_, "
-			+ "user0_.password as password1_, user0_.username as username1_ from JOBS.User user0_" );
+			+ "user0_.password as password1_, user0_.username as username1_ from JOBS.Users user0_" );
 
 		final List results = nativeQuery.getResultList();
 		for( int i = 0; i < results.size(); i++ ) {

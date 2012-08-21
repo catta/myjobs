@@ -13,10 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Stateless
-public class PersistenceService
+public class StorageService
 {
 
-	private static final Logger	LOG	= LoggerFactory.getLogger( PersistenceService.class );
+	private static final Logger	LOG	= LoggerFactory.getLogger( StorageService.class );
 
 	@PersistenceContext( name = "jobs" )
 	private EntityManager		entityManager;
